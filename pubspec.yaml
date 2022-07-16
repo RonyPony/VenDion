@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.2.4
+  flutter_svg: ^1.1.1+1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -62,6 +63,14 @@ flutter:
   assets:
     - assets/splash.svg
     - assets/splash.png
+    - assets/logo.svg
+    - assets/user.svg
+    - assets/lock.svg
+    - assets/youtube.svg
+    - assets/instagram.svg
+    - assets/facebook.svg
+    - assets/email.svg
+    - assets/tel.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
