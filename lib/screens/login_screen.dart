@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vendion/screens/home_screen.dart';
 import 'package:vendion/screens/register_screen.dart';
 
 import '../widgets/main_button_widget.dart';
@@ -134,11 +135,17 @@ class _LoginScreenState extends State<LoginScreen> {
   _buildLoginBtn() {
     return Padding(
       padding: const EdgeInsets.only(top: 30),
-      child: CustomBtn(
-        onTap: () {
-          
+      child: GestureDetector(
+        onTap: (){
+          Navigator.pushNamedAndRemoveUntil(
+              context, HomeScreen.routeName, (route) => false);
         },
-        text: "Login",
+        child: CustomBtn(
+          onTap: () {
+            
+          },
+          text: "Login",
+        ),
       ),
     );
   }

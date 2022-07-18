@@ -63,6 +63,9 @@ flutter:
   assets:
     - assets/splash.svg
     - assets/splash.png
+    - assets/Tesla.png
+    - assets/audi.png
+    - assets/placeholder.jpg
     - assets/logo.svg
     - assets/user.svg
     - assets/lock.svg
@@ -71,6 +74,18 @@ flutter:
     - assets/facebook.svg
     - assets/email.svg
     - assets/tel.svg
+    - assets/notification-active.svg
+    - assets/filter.svg
+    - assets/search.svg
+    - assets/featured.svg
+    - assets/menu.svg
+    - assets/liked.svg
+    - assets/notliked.svg
+    - assets/video.svg
+    - assets/home.svg
+    - assets/favorite.svg
+    - assets/profile.svg
+    - assets/video.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
