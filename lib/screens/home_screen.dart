@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:vendion/screens/filters_screen.dart';
 import 'package:vendion/widgets/bottom_menu.dart';
 import 'package:vendion/widgets/carrousel.dart';
 import 'package:vendion/widgets/drawer.dart';
@@ -14,6 +15,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //0 is all
+  //1 is new
+  //2 is used
+  int _carConditions=0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,15 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   _buildCarrouser(),
                   _buildRecommendedSection(
                       MediaQuery.of(context).size.width * .30),
-                SizedBox(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * .15,
                   )
                 ],
               ),
             ),
-            
             BottomMenu(),
-            
           ],
         ));
   }
@@ -113,7 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildaRecommended(true, true, "Audi Q7 Sport", "US. 23,000"),
-                  _buildaRecommended(false, true, "Audi Q7 Sport", "US. 23,000"),
+                  _buildaRecommended(
+                      false, true, "Audi Q7 Sport", "US. 23,000"),
                 ],
               ),
             ),
@@ -126,7 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildaRecommended(true, true, "Audi Q7 Sport", "US. 23,000"),
-                  _buildaRecommended(false, true, "Audi Q7 Sport", "US. 23,000"),
+                  _buildaRecommended(
+                      false, true, "Audi Q7 Sport", "US. 23,000"),
                 ],
               ),
             ),
@@ -169,9 +175,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: SvgPicture.asset("assets/filter.svg"),
+        GestureDetector(
+          onTap: () {
+           Navigator.pushNamed(context, FiltersScreen.routeName);
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: SvgPicture.asset("assets/filter.svg"),
+          ),
         )
       ],
     );
