@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:vendion/screens/favorites_screen.dart';
+import 'package:vendion/screens/home_screen.dart';
 
 class BottomMenu extends StatefulWidget {
   static const TextStyle optionStyle =
@@ -21,17 +23,33 @@ class BottomMenu extends StatefulWidget {
     ),
   ];
 
-  BottomMenu({Key? key}) : super(key: key);
-
+  BottomMenu({Key? key, required this.currentIndex}) : super(key: key);
+final int currentIndex;
   @override
   State<BottomMenu> createState() => _BottomMenuState();
 }
 
 class _BottomMenuState extends State<BottomMenu> {
   int _selectedIndex = 0;
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _selectedIndex = widget.currentIndex;
+  }
   void _onItemTapped(int index) {
     setState(() {
+      if (index==0) {
+        Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
+      }
+      if (index == 1) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, FavoriteScreen.routeName, (route) => false);
+      }
+      if (index == 2) {
+        // Navigator.pushNamedAndRemoveUntil(
+            // context, Pro.routeName, (route) => false);
+      }
       _selectedIndex = index;
     });
   }
@@ -67,14 +85,14 @@ class _BottomMenuState extends State<BottomMenu> {
                     Icons.favorite_rounded,
                     size: 35,
                   ),
-                  label: 'Business',
+                  label: 'Favorite',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person,
                     size: 35,
                   ),
-                  label: 'School',
+                  label: 'Profile',
                 ),
               ],
               currentIndex: _selectedIndex,
@@ -113,18 +131,21 @@ class _BottomMenuState extends State<BottomMenu> {
                     Icons.favorite_rounded,
                     size: 35,
                   ),
-                  label: 'Business',
+                  label: 'Favorites',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person,
                     size: 35,
                   ),
-                  label: 'School',
+                  label: 'Profile',
                 ),
               ],
               currentIndex: _selectedIndex,
-              unselectedItemColor: Color(0xffcccccc),
+              selectedIconTheme: IconThemeData(
+                
+              ),
+              unselectedItemColor: Colors.white.withOpacity(.3),
               selectedItemColor: Colors.white,
               onTap: _onItemTapped,
             ),

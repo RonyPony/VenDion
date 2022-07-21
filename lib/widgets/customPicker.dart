@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/svg.dart';
 
 const double _kItemExtent = 32.0;
 
@@ -28,14 +29,15 @@ class _CustomPickerState extends State<CustomPicker> {
     showCupertinoModalPopup<void>(
         context: context,
         builder: (BuildContext context) => Container(
-              height: 216,
+              height: 260,
               padding: const EdgeInsets.only(top: 6.0),
               // The Bottom margin is provided to align the popup above the system navigation bar.
               margin: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
               // Provide a background color for the popup.
-              color: CupertinoColors.systemBackground.resolveFrom(context),
+              color: Color(0xffff5b00).withOpacity(.5),
+              
               // Use a SafeArea widget to avoid system overlaps.
               child: SafeArea(
                 top: false,
@@ -46,61 +48,79 @@ class _CustomPickerState extends State<CustomPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      backgroundColor: const Color(0xffff5b00),
-      child: DefaultTextStyle(
-        style: TextStyle(
-          color: Color(0xffff5b00),
-          fontSize: 22.0,
-        ),
-        child: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  widget.placeHolder + " ",
-                  style: const TextStyle(color: Colors.white),
-                ),
-                CupertinoButton(
-                  padding: EdgeInsets.zero,
+    return Container(
+      width: 180,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: CupertinoPageScaffold(
+          backgroundColor: const Color(0xffff5b00),
+          child: DefaultTextStyle(
+            style: TextStyle(
+              color: Color(0xffff5b00),
+              fontSize: 20,
+            ),
+            child: Center(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      widget.placeHolder + " ",
+                      style: const TextStyle(color: Colors.white,fontSize: 18),
+                    ),
+                    CupertinoButton(
+                      padding: EdgeInsets.zero,
 
-                  // Display a CupertinoPicker with list of fruits.
-                  onPressed: () => _showDialog(
-                    CupertinoPicker(
-                      // magnification: 2,
-                      // squeeze:1,
-                      // useMagnifier: true,
-                      itemExtent: _kItemExtent,
-
-                      // looping: true,
-                      // This is called when selected item is changed.
-                      onSelectedItemChanged: (int selectedItem) {
-                        widget.onChange(selectedItem);
-                        setState(() {
-                          _selectedFruit = selectedItem;
-                        });
-                      },
-                      children: List<Widget>.generate(widget.options.length,
-                          (int index) {
-                        return Center(
-                          child: Text(
-                            widget.options[index],
+                      // Display a CupertinoPicker with list of fruits.
+                      onPressed: () => _showDialog(
+                        CupertinoPicker(
+                          // magnification: 2,
+                          // squeeze:1,
+                          // useMagnifier: true,
+                          itemExtent: _kItemExtent,
+  
+                          // looping: true,
+                          // This is called when selected item is changed.
+                          onSelectedItemChanged: (int selectedItem) {
+                            widget.onChange(selectedItem);
+                            setState(() {
+                              _selectedFruit = selectedItem;
+                            });
+                          },
+                          children: List<Widget>.generate(widget.options.length,
+                              (int index) {
+                            return Center(
+                              child: Text(
+                                widget.options[index].toUpperCase(),
+                                style: TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                      // This displays the selected fruit name.
+                      child: Row(
+                        children: [
+                          Text(
+                            widget.options[_selectedFruit],
+                            style:  TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.white.withOpacity(0.8)
+                            ),
                           ),
-                        );
-                      }),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SvgPicture.asset("assets/arrowDown.svg",color: Colors.white,),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  // This displays the selected fruit name.
-                  child: Text(
-                    widget.options[_selectedFruit],
-                    style: const TextStyle(
-                      fontSize: 22.0,
-                    ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

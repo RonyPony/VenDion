@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:vendion/screens/favorites_screen.dart';
 import 'package:vendion/screens/filters_screen.dart';
 import 'package:vendion/screens/home_screen.dart';
 import 'package:vendion/screens/login_screen.dart';
+import 'package:vendion/screens/notifications_screen.dart';
 import 'package:vendion/screens/register_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
@@ -10,7 +12,7 @@ final Map<String, WidgetBuilder> routes = {
   RegisterScreen.routeName: (context) => const RegisterScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   FiltersScreen.routeName: (context) =>  FiltersScreen(),
-  // RegisterPage.routeName: (context) => RegisterPage(),
-  // ChatScreen.routeName: (context) => ChatScreen(),
+  NotificationsScreen.routeName: (context) => NotificationsScreen(),
+  FavoriteScreen.routeName: (context) => FavoriteScreen(),
   // Conversation.routeName: (context) => Conversation(),
 };

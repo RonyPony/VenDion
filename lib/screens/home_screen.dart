@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vendion/screens/filters_screen.dart';
+import 'package:vendion/screens/notifications_screen.dart';
 import 'package:vendion/widgets/bottom_menu.dart';
 import 'package:vendion/widgets/carrousel.dart';
 import 'package:vendion/widgets/drawer.dart';
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   //0 is all
   //1 is new
   //2 is used
-  int _carConditions=0;
+  int _carConditions = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 20),
-              child: SvgPicture.asset("assets/notification-active.svg"),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, NotificationsScreen.routeName);
+                },
+                  child: SvgPicture.asset("assets/notification-active.svg")),
             )
           ],
           title: const Text(
@@ -63,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            BottomMenu(),
+            BottomMenu(currentIndex: 0,),
           ],
         ));
   }
@@ -177,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         GestureDetector(
           onTap: () {
-           Navigator.pushNamed(context, FiltersScreen.routeName);
+            Navigator.pushNamed(context, FiltersScreen.routeName);
           },
           child: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),

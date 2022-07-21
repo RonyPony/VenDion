@@ -7,6 +7,8 @@ import 'package:flutter_picker/Picker.dart';
 import 'package:vendion/models/brands.dart';
 
 import '../widgets/customPicker.dart';
+import '../widgets/customRangeSelector.dart';
+import '../widgets/textBox_widget.dart';
 
 class FiltersScreen extends StatefulWidget {
   static String routeName = "/filtersScreen";
@@ -20,7 +22,8 @@ class _StateFilterScreen extends State<FiltersScreen> {
 
   String PickerData = "ronel";
 
-  List<String> _carBrandsName = [];
+  List<String> _carBrandsName = ["Todas"];
+  List<String> _carModelName = ["Todos"];
   late Future<List<Brands>> brands;
   int selectedbrandId = 0;
   @override
@@ -43,6 +46,9 @@ class _StateFilterScreen extends State<FiltersScreen> {
           children: [
             _buildCarConditions(),
             _buildBrandModelSelectors(context),
+            _buildLocationField(),
+            _buildPriceRange(),
+            _buildApplyButton()
           ],
         ),
       ),
@@ -70,7 +76,7 @@ class _StateFilterScreen extends State<FiltersScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    "All",
+                    "Todos",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xffff5b00),
@@ -110,7 +116,7 @@ class _StateFilterScreen extends State<FiltersScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    "New",
+                    "Nuevos",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xffff5b00),
@@ -150,7 +156,7 @@ class _StateFilterScreen extends State<FiltersScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    "Used",
+                    "Usados",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xffff5b00),
@@ -190,7 +196,7 @@ class _StateFilterScreen extends State<FiltersScreen> {
       future: brands,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return CircularProgressIndicator(color: Color(0xffff5b00),);
         }
         if (snapshot.hasError) {
           return Text("Error");
@@ -202,22 +208,39 @@ class _StateFilterScreen extends State<FiltersScreen> {
               _carBrandsName.add(element.name!);
             },
           );
-          return CustomPicker(
-            placeHolder: "Selecciona:",
-            options: _carBrandsName,
-            onChange: (int x) async {
-              if (kDebugMode) {
-                selectedbrandId = x;
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomPicker(
+                placeHolder: "Marca:",
+                options: _carBrandsName,
+                onChange: (int x) async {
+                  if (kDebugMode) {
+                    selectedbrandId = x;
+                    //print("Selected ${brands[x]}");
+                  }
+                },
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              CustomPicker(
+                placeHolder: "Modelo:",
+                options: _carModelName,
+                onChange: (int x) async {
+                  if (kDebugMode) {
+                    selectedbrandId = x;
 
-                // print("Selected ${brands[x]}");
-              }
-            },
+                    // print("Selected ${brands[x]}");
+                  }
+                },
+              )
+            ],
           );
         }
         return Text("Error");
       },
     );
-    
   }
 
   Future<List<Brands>> getBrands() async {
@@ -243,5 +266,96 @@ class _StateFilterScreen extends State<FiltersScreen> {
       return marcas;
     }
     // _carBrandsName
+  }
+
+  _buildLocationField() {
+    TextEditingController _controller = TextEditingController();
+    return Padding(
+      padding: const EdgeInsets.only(top: 50),
+      child: CustomTextBox(
+        controller: _controller,
+        onChange: (){
+
+        },
+        text: 'Ubicacion',
+        svg: Icon(Icons.location_on_rounded,color: Color(0xffff5b00) ,),
+      ),
+    );
+  }
+  
+  _buildPriceRange() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 50),
+      child: Container(
+      width: 324,
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+              Text(
+                  "Price Range",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w600,
+                  ),
+              ),
+              SizedBox(height: 5),
+              
+              CustomRangeSelect(
+                min: 0,
+                max: 60000,
+              onChange: (RangeValues valores) {
+                
+                if (kDebugMode) {
+                  print(valores);
+                  // print("$minimunAgeToMatch - $maximunAgeToMatch");
+                }
+              },
+            ),
+          ],
+      ),
+),
+    );
+  }
+  
+  _buildApplyButton() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 50),
+      child: GestureDetector(
+        onTap: (){
+
+        },
+        child: SizedBox(
+      width: 174,
+      child: Material(
+          color: Color(0xffff5b00),
+          borderRadius: BorderRadius.circular(10),
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 15, ),
+              child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children:[
+                      Text(
+                          "Apply Filters",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: "Poppins",
+                              fontWeight: FontWeight.w600,
+                          ),
+                      ),
+                  ],
+              ),
+          ),
+      ),
+),
+      ),
+    );
   }
 }
