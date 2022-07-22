@@ -4,6 +4,7 @@ import 'package:vendion/screens/filters_screen.dart';
 import 'package:vendion/screens/home_screen.dart';
 import 'package:vendion/screens/login_screen.dart';
 import 'package:vendion/screens/notifications_screen.dart';
+import 'package:vendion/screens/profile_screen.dart';
 import 'package:vendion/screens/register_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
@@ -14,5 +15,5 @@ final Map<String, WidgetBuilder> routes = {
   FiltersScreen.routeName: (context) =>  FiltersScreen(),
   NotificationsScreen.routeName: (context) => NotificationsScreen(),
   FavoriteScreen.routeName: (context) => FavoriteScreen(),
-  // Conversation.routeName: (context) => Conversation(),
+  ProfileScreen.routeName: (context) => ProfileScreen(),
 };

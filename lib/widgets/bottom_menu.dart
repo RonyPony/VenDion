@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vendion/screens/favorites_screen.dart';
 import 'package:vendion/screens/home_screen.dart';
+import 'package:vendion/screens/profile_screen.dart';
 
 class BottomMenu extends StatefulWidget {
   static const TextStyle optionStyle =
@@ -39,18 +40,21 @@ class _BottomMenuState extends State<BottomMenu> {
   }
   void _onItemTapped(int index) {
     setState(() {
-      if (index==0) {
-        Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
+      if (_selectedIndex!=index) {
+        if (index == 0) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, HomeScreen.routeName, (route) => false);
+        }
+        if (index == 1) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, FavoriteScreen.routeName, (route) => false);
+        }
+        if (index == 2) {
+          Navigator.pushNamedAndRemoveUntil(
+          context, ProfileScreen.routeName, (route) => false);
+        }
+        _selectedIndex = index;
       }
-      if (index == 1) {
-        Navigator.pushNamedAndRemoveUntil(
-            context, FavoriteScreen.routeName, (route) => false);
-      }
-      if (index == 2) {
-        // Navigator.pushNamedAndRemoveUntil(
-            // context, Pro.routeName, (route) => false);
-      }
-      _selectedIndex = index;
     });
   }
 
