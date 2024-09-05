@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 class UserPhoto extends StatefulWidget {
   final double? size;
+
   const UserPhoto({super.key, required this.size});
 
   @override
@@ -21,7 +22,7 @@ class _UserPhotoState extends State<UserPhoto> {
           radius: widget.size,
           child: Text(
             'RC',
-            style: TextStyle(fontSize: 40, color: Colors.white),
+            style: TextStyle(fontSize: widget.size!, color: Colors.white),
           ), //Text
         ),
         // CircleAvatar(

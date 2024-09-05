@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vendion/widgets/profile_photo.dart';
-
+import 'package:vendion/widgets/user_name_rating.dart';
 import '../widgets/bottom_menu.dart';
 import '../widgets/drawer.dart';
 import 'notifications_screen.dart';
@@ -51,7 +51,8 @@ class _stateProfileScreen extends State<ProfileScreen> {
               children: [
                 UserPhoto(
                   size: 50,
-                )
+                ),
+                UserNameRating()
               ],
             ),
           ),
