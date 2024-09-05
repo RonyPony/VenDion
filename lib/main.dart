@@ -14,12 +14,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       routes: routes,
-      
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: LoginScreen(),
-      
+
       // home: const MyHomePage(title: 'Loading'),
     );
   }
@@ -45,12 +45,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
-        title:Text("VenDion"),
+        title: Text("VenDion"),
       ),
-      
     );
   }
 }

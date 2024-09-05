@@ -83,7 +83,9 @@ class _StateFavoriteScreen extends State<FavoriteScreen> {
                           _buildaFavorite(true, "name", "finalPrice"),
                         ],
                       ),
-                      SizedBox(height: 100,)
+                      SizedBox(
+                        height: 100,
+                      )
                     ],
                   )
                 ],

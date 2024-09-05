@@ -25,22 +25,23 @@ class BottomMenu extends StatefulWidget {
   ];
 
   BottomMenu({Key? key, required this.currentIndex}) : super(key: key);
-final int currentIndex;
+  final int currentIndex;
   @override
   State<BottomMenu> createState() => _BottomMenuState();
 }
 
 class _BottomMenuState extends State<BottomMenu> {
   int _selectedIndex = 0;
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _selectedIndex = widget.currentIndex;
   }
+
   void _onItemTapped(int index) {
     setState(() {
-      if (_selectedIndex!=index) {
+      if (_selectedIndex != index) {
         if (index == 0) {
           Navigator.pushNamedAndRemoveUntil(
               context, HomeScreen.routeName, (route) => false);
@@ -51,7 +52,7 @@ class _BottomMenuState extends State<BottomMenu> {
         }
         if (index == 2) {
           Navigator.pushNamedAndRemoveUntil(
-          context, ProfileScreen.routeName, (route) => false);
+              context, ProfileScreen.routeName, (route) => false);
         }
         _selectedIndex = index;
       }
@@ -60,7 +61,6 @@ class _BottomMenuState extends State<BottomMenu> {
 
   @override
   Widget build(BuildContext context) {
-
     if (Platform.isIOS) {
       return Align(
         alignment: Alignment.bottomCenter,
@@ -107,9 +107,8 @@ class _BottomMenuState extends State<BottomMenu> {
           ),
         ),
       );
-      
     } else {
-     return Align(
+      return Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
@@ -146,9 +145,7 @@ class _BottomMenuState extends State<BottomMenu> {
                 ),
               ],
               currentIndex: _selectedIndex,
-              selectedIconTheme: IconThemeData(
-                
-              ),
+              selectedIconTheme: IconThemeData(),
               unselectedItemColor: Colors.white.withOpacity(.3),
               selectedItemColor: Colors.white,
               onTap: _onItemTapped,
@@ -157,7 +154,5 @@ class _BottomMenuState extends State<BottomMenu> {
         ),
       );
     }
-    return SizedBox();
-    
   }
 }

@@ -196,7 +196,9 @@ class _StateFilterScreen extends State<FiltersScreen> {
       future: brands,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator(color: Color(0xffff5b00),);
+          return CircularProgressIndicator(
+            color: Color(0xffff5b00),
+          );
         }
         if (snapshot.hasError) {
           return Text("Error");
@@ -274,41 +276,40 @@ class _StateFilterScreen extends State<FiltersScreen> {
       padding: const EdgeInsets.only(top: 50),
       child: CustomTextBox(
         controller: _controller,
-        onChange: (){
-
-        },
+        onChange: () {},
         text: 'Ubicacion',
-        svg: Icon(Icons.location_on_rounded,color: Color(0xffff5b00) ,),
+        svg: Icon(
+          Icons.location_on_rounded,
+          color: Color(0xffff5b00),
+        ),
       ),
     );
   }
-  
+
   _buildPriceRange() {
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: Container(
-      width: 324,
-      child: Column(
+        width: 324,
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
-              Text(
-                  "Price Range",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w600,
-                  ),
+          children: [
+            Text(
+              "Price Range",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.w600,
               ),
-              SizedBox(height: 5),
-              
-              CustomRangeSelect(
-                min: 0,
-                max: 60000,
+            ),
+            SizedBox(height: 5),
+            CustomRangeSelect(
+              min: 0,
+              max: 60000,
               onChange: (RangeValues valores) {
-                
                 if (kDebugMode) {
                   print(valores);
                   // print("$minimunAgeToMatch - $maximunAgeToMatch");
@@ -316,45 +317,46 @@ class _StateFilterScreen extends State<FiltersScreen> {
               },
             ),
           ],
+        ),
       ),
-),
     );
   }
-  
+
   _buildApplyButton() {
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: GestureDetector(
-        onTap: (){
-
-        },
+        onTap: () {},
         child: SizedBox(
-      width: 174,
-      child: Material(
-          color: Color(0xffff5b00),
-          borderRadius: BorderRadius.circular(10),
-          child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 15, ),
-              child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children:[
-                      Text(
-                          "Apply Filters",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontFamily: "Poppins",
-                              fontWeight: FontWeight.w600,
-                          ),
-                      ),
-                  ],
+          width: 174,
+          child: Material(
+            color: Color(0xffff5b00),
+            borderRadius: BorderRadius.circular(10),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 1,
+                vertical: 15,
               ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Apply Filters",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-      ),
-),
+        ),
       ),
     );
   }
